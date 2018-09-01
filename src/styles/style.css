@@ -1,0 +1,109 @@
+@font-face {
+  src: url("../fonts/Oswald-Regular.ttf");
+  font-family: 'Oswald', sans-serif; }
+
+@font-face {
+  src: url("../fonts/Merriweather-Regular.ttf");
+  font-family: 'Merriweather', serif; }
+
+html, body {
+  height: 100%;
+  width: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Merriweather', serif;
+  background: #0ba4e5; }
+
+.mods-list {
+  background: url("../imgs/loading.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100%;
+  width: 100%; }
+
+.mods-info-block {
+  border: 2pt solid #222222;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 55pt; }
+
+.mods-info-block.installed {
+  background: #00dc00; }
+
+.mods-info-block.need-update {
+  background: #f9e600; }
+
+.mod-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 18pt;
+  line-height: 50pt;
+  margin: 5pt 0;
+  text-align: center; }
+
+.mod-logo {
+  float: left;
+  max-height: 55pt;
+  max-width: 75pt;
+  margin: 0 15pt; }
+
+.opening-arrow {
+  cursor: pointer;
+  height: 55pt;
+  padding: 0 15pt;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; }
+  .opening-arrow img {
+    height: 65%; }
+
+.additional_block {
+  display: none;
+  width: 100%; }
+
+.additional-info {
+  display: block;
+  font-size: 16pt;
+  text-align: center; }
+
+.mod-description {
+  font-size: 14pt;
+  margin: 7.5pt;
+  text-align: center; }
+
+.download_mod, .installing_mod, .delete_mod {
+  width: 35%;
+  height: 30pt;
+  font-size: 16pt;
+  font-weight: bold;
+  border: 2pt solid #222;
+  border-radius: 2pt;
+  margin: 0 10pt 10pt; }
+
+.download_mod {
+  cursor: pointer;
+  background: #ffffff; }
+  .download_mod:hover {
+    background: #0ba4e5;
+    border-color: #0082c3;
+    color: #ffffff; }
+  .download_mod:active {
+    background: #0082c3;
+    border-color: #004f90;
+    color: #ffffff; }
+
+.installing_mod, .delete_mod {
+  text-align: center;
+  line-height: 30pt; }
+
+.delete_mod {
+  background: #ea381b;
+  color: #ffffff;
+  cursor: pointer; }
+  .delete_mod:hover {
+    background: #c81600; }
+  .delete_mod:active {
+    background: #a60000; }

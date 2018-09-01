@@ -1,0 +1,7 @@
+node_modules
+out
+.idea
+db.connect.php
+editor-password.php
+installed_mods.ini
+settings.ini

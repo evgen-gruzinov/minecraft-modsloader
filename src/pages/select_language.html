@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select language</title>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <style>
+        @font-face {
+            src: url("../fonts/Merriweather-Regular.ttf");
+            font-family: 'Merriweather', serif;
+        }
+        html,body {
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0;
+        }
+        .languages-block {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+        .lang {
+            width: 45%;
+            height: 75%;
+            font-size: 14pt;
+            font-weight: bold;
+            border: 2pt solid #222222;
+            background: #f5f5f5;
+            cursor: pointer;
+        }
+        .lang:hover {
+            background: #222222;
+            color: #ffffff;
+        }
+        .lang img {
+            border: 1pt solid #222222;
+            width: 22.5%;
+        }
+    </style>
+</head>
+<body>
+    <div class="languages-block">
+        <button class="lang" lang="en"><img src="../imgs/flag-en.svg" alt=""> English</button>
+        <button class="lang" lang="ru"><img src="../imgs/flag-ru.svg" alt=""> Русский</button>
+    </div>
+    <script src="../js/select_language.js"></script>
+</body>
+</html>

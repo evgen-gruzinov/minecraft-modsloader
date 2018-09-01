@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Minecraft Modsloader</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <meta charset="UTF-8">
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="../js/jqueryrotate.2.1.js"></script>
+<body>
+    <div class="mods-list">
+    </div>
+</body>
+
+<script src="../js/mainWindow.js"></script>
+<script>
+    const remote = require('electron').remote;
+    const {app} = remote;
+    let this_window = remote.getCurrentWindow();
+    this_window.on('close', function() {
+        app.quit();
+    });
+</script>
+</html>

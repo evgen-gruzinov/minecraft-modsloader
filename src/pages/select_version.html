@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Minecraft Version</title>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <link href="../styles/select2.min.css" rel="stylesheet" />
+    <script src="../js/select2.min.js"></script>
+    <style>
+        @font-face {
+            src: url("../fonts/Merriweather-Regular.ttf");
+            font-family: 'Merriweather', serif;
+        }
+        html,body {
+            width: 100%;
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0;
+        }
+        select, .select2 {
+            display: block;
+            margin: 10pt auto;
+            width: 95%;
+            font-weight: bold;
+        }
+        .select_version {
+            display: block;
+            margin: 15pt auto;
+            height: 30pt;
+            width: 60%;
+            font-weight: bold;
+            border: 2pt solid #222222;
+            background: #f5f5f5;
+            cursor: pointer;
+        }
+        .select_version:hover {
+            background: #222222;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <select name="version" id="version">
+        <optgroup label="1.12">
+            <option value="1.12.2">1.12.2</option>
+            <option value="1.12.2">1.12.1</option>
+            <option value="1.12.2">1.12</option>
+        </optgroup>
+        <optgroup label="1.11">
+            <option value="1.11.2">1.11.2</option>
+            <option value="1.11.1">1.11.1</option>
+            <option value="1.11">1.11</option>
+        </optgroup>
+        <optgroup label="1.10">
+            <option value="1.10.2">1.10.2</option>
+            <option value="1.10.1">1.10.1</option>
+            <option value="1.10">1.10</option>
+        </optgroup>
+    </select>
+    <button class="select_version">Select</button>
+    <script src="../js/select_version.js"></script>
+</body>
+</html>
