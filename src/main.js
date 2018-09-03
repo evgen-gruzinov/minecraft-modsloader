@@ -73,7 +73,7 @@ app.on('ready', () => {
     height: 700,
     width: 500,
     icon: need_icon,
-    show: true,
+    show: false,
   });
 
   startCheck.loadURL(url.format({

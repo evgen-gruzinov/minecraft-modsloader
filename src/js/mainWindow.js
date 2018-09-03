@@ -63,50 +63,84 @@ const Downloader = function () {
     let new_remote = null;
     const write_to_file = false;
     let write_file_ready = false;
+    percent = 0;
     const u = url.parse(remote);
     const opts = {
       host: u.hostname,
       port: u.port,
       path: u.pathname,
     };
-    request = https.get(opts, (response) => {
-      console.log(response.headers);
-      switch (response.statusCode) {
-        case 200:
-          content_length = response.headers['content-length'];
-          break;
-        case 302:
-          new_remote = response.headers.location;
-          self.download(new_remote, local_file, num + 1);
-          return;
-          break;
-        case 404:
-          console.log('File Not Found');
-        default:
-                    // what the hell is default in this situation? 404?
-          request.abort();
-          return;
-      }
-      response.on('data', (chunk) => {
-                // are we supposed to be writing to file?
-        if (!write_file_ready) {
-                    // set up the write file
-          write_file = fs.createWriteStream(local_file);
-          write_file_ready = true;
+    if (remote.indexOf('https') === 0) {
+      request = https.get(opts, (response) => {
+        console.log(response.headers);
+        switch (response.statusCode) {
+          case 200:
+            content_length = response.headers['content-length'];
+            break;
+          case 302:
+            new_remote = response.headers.location;
+            self.download(new_remote, local_file, num + 1);
+            return;
+            break;
+          case 404:
+            console.log('File Not Found');
+            break;
+          default:
+            request.abort();
+            return;
         }
-        write_file.write(chunk);
-        downloaded_bytes += chunk.length;
-        percent = parseInt((downloaded_bytes / content_length) * 100);
-        $('.installing_mod').text(`${percent}%`);
+        response.on('data', (chunk) => {
+          if (!write_file_ready) {
+            write_file = fs.createWriteStream(local_file);
+            write_file_ready = true;
+          }
+          write_file.write(chunk);
+          downloaded_bytes += chunk.length;
+          percent = parseInt((downloaded_bytes / content_length) * 100);
+          $('.installing_mod').text(`${percent}%`);
+        });
+        response.on('end', () => {
+          complete = true;
+          write_file.end();
+        });
       });
-      response.on('end', () => {
-        complete = true;
-        write_file.end();
+    } else {
+      request = http.get(opts, (response) => {
+        console.log(response.headers);
+        switch (response.statusCode) {
+          case 200:
+            content_length = response.headers['content-length'];
+            break;
+          case 302:
+            new_remote = response.headers.location;
+            self.download(new_remote, local_file, num + 1);
+            return;
+            break;
+          case 404:
+            console.log('File Not Found');
+          default:
+            request.abort();
+            return;
+        }
+        response.on('data', (chunk) => {
+          if (!write_file_ready) {
+            write_file = fs.createWriteStream(local_file);
+            write_file_ready = true;
+          }
+          write_file.write(chunk);
+          downloaded_bytes += chunk.length;
+          percent = parseInt((downloaded_bytes / content_length) * 100);
+          $('.installing_mod').text(`${percent}%`);
+        });
+        response.on('end', () => {
+          complete = true;
+          write_file.end();
+        });
       });
-    });
     request.on('error', (e) => {
       console.log(`Got error: ${e}`);
     });
+    }
   };
 };
 
@@ -144,17 +178,14 @@ $(document).ready(() => {
       modFileName = `${temp.replace(/\s/g, '') + additionalFileInfo}.jar`;
       downloadLink = modData.download_link;
       modVersion = modData.mod_version;
-
+      modInstalled = false;
       installedModsFile.forEach((str) => {
         length = str.length - 1;
         testStr = str.substr(0, length);
-        if (length > 0) {
-          if (testStr.indexOf(modFileName) === 0) {
-            modInstalled = true;
-            fullStr = str;
-          } else {
-            modInstalled = false;
-          }
+
+        if (testStr.indexOf(modFileName) === 0 && length > 0) {
+          modInstalled = true;
+          fullStr = str;
         }
       });
 
